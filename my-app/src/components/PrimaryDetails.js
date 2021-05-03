@@ -31,15 +31,16 @@ class PrimaryDetail extends Component {
     city: [],
     statesError: "",
     cityError: "",
-    official:false
-    // check:false
+    official:false,
+    check:false
+
   };
   componentDidMount = () => {
     axios
       .get("http://localhost:3001/state")
       .then((res) => {
         console.log(res.data);
-        this.setState({ states: res.data });
+        this.setState({ states: res.data,check:false });
        
       })
       .catch((err) => {
@@ -48,7 +49,7 @@ class PrimaryDetail extends Component {
   };
   handlecity = () => {
     if (this.state.form.stateCheck) {
-      //  this.setState({formValid:{check:false}})
+       this.setState({check:true})
       axios
         .get("http://localhost:3001/" + this.state.form.stateCheck)
         .then((res) => {
@@ -58,7 +59,7 @@ class PrimaryDetail extends Component {
         })
         .catch((err) => {
         
-          this.setState({ cityError: "there is some error in fecthing city " });
+          this.setState({ cityError: "there is some error in fetching city " });
         });
     }
   };
@@ -82,6 +83,7 @@ class PrimaryDetail extends Component {
         } else {
           formErrorMessage.city = "";
           formValid.city = true;
+          
           console.log("after", this.state.formValid.city);
         }
         break;
@@ -93,6 +95,7 @@ class PrimaryDetail extends Component {
         } else {
           formErrorMessage.stateCheck = "";
           formValid.stateCheck = true;
+          this.state.check = false;
            console.log("after",this.state.formValid.stateCheck)
         }
         break;
@@ -130,7 +133,8 @@ class PrimaryDetail extends Component {
       formValid.middleName &&
       formValid.lastName &&
       formValid.stateCheck &&
-      formValid.city;
+      formValid.city &&
+      this.state.check;
     console.log("final button active",formValid.buttonActive);
     this.setState({ formErrorMessage: formErrorMessage, formValid: formValid });
   };
@@ -151,7 +155,7 @@ class PrimaryDetail extends Component {
             <div className="col-md-4 offset-md-4">
               <div className="card">
                 <div className="card-header bg-custom">
-                  <h3 className="text-primary">Primary Details</h3>
+                  <h3 className="text-primary text-center">Primary Details</h3>
                 </div>
                 <div className="card-body">
                   <form>
@@ -211,7 +215,7 @@ class PrimaryDetail extends Component {
                       <select
                         onChange={(e) => this.handleChange(e)}
                        
-                        onMouseUp={this.handlecity}
+                        
                         className="form-control"
                         value={form.stateCheck}
                         name="stateCheck"
@@ -237,6 +241,7 @@ class PrimaryDetail extends Component {
                       <select
                         disabled={!formValid.stateCheck}
                         // onClick={this.handlecity}
+                        onMouseOver   ={this.handlecity}
                         onChange={this.handleChange}
                         className="form-control"
                         

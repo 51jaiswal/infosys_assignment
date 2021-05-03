@@ -26,7 +26,7 @@ class Submission extends Component {
             <div className="col-md-4 offset-md-4">
               <div className="card">
                 <div className="card-header bg-custom">
-                  <h3 className="text-primary">Submit Details</h3>
+                  <h3 className="text-primary text-center">Submit Details</h3>
                 </div>
                 <div className="card-body">
                   <form>

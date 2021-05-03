@@ -106,7 +106,7 @@ class OfficialDetails extends Component {
             <div className="col-md-4 offset-md-4">
               <div className="card">
                 <div className="card-header bg-custom">
-                  <h3 className="text-primary">Official Details</h3>
+                  <h3 className="text-primary text-center">Official Details</h3>
                 </div>
                 <div className="card-body">
                   <form>
